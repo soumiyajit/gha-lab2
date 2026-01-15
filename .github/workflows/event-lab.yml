@@ -38,10 +38,3 @@ jobs:
     steps:
       - name: PR Job
         run: echo "Reviewing code from pull request."
-
-  manual-maintenance:
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Manual Job
-        run: echo "Reason provided: ${{ github.event.inputs.reason }}"
