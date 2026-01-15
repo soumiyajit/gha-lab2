@@ -25,3 +25,8 @@ jobs:
           echo "Triggered by: ${{ github.event_name }}"
           echo "Action: ${{ github.action }}"
 
+  backend-deployment:
+      if: github.event_name == 'push'
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo "Deploying backend because a PUSH occurred in the backend folder."
