@@ -30,12 +30,6 @@ describe('Student API', () => {
         age: 20,
         major: 'History'
     };
-
-    const studentData = {
-        name: 'Test-name',
-        age: 25,
-        major: 'Test Subject'
-    };
     
 
     it('POST /api/students - should create a new student', async () => {
