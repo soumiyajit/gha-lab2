@@ -1,44 +1,32 @@
-name: Event Understanding Lab
-
-on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'backend/**'
-  pull_request:
-    types: [opened, reopened]
-  schedule:
-    - cron: '0 * * * *'
-  workflow_dispatch:
-    inputs:
-      reason:
-        description: 'Why are you running this manually?'
-        required: true
-        default: 'Testing'
-
+name: Deploy Project
+on: [push, workflow_dispatch]
 jobs:
-  detect-event:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Report Event Type
-        run: |
-          echo "Triggered by: ${{ github.event_name }}"
-          echo "Action: ${{ github.action }}"
-  backend-deployment:
-    if: github.event_name == 'push'
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
+  deploy:
+    needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Push Job
-        run: echo "Deploying backend from push event."
-  pr-review-check:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - name: PR Job
-        run: echo "Reviewing code from pull request."
-  manual-maintenance:
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Manual Job
-        run: echo "Manual Job"
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Build project
+        run: npm run build
+      - name: Deploy
+        run: echo "Deploying ..."
