@@ -38,3 +38,9 @@ jobs:
     steps:
       - name: PR Job
         run: echo "Reviewing code from pull request."
+  backend-deployment:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Push Job
+        run: echo "Deploying backend from push event."
