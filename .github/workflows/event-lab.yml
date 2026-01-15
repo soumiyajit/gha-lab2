@@ -25,17 +25,3 @@ jobs:
           echo "Triggered by: ${{ github.event_name }}"
           echo "Action: ${{ github.action }}"
 
-  backend-deployment:
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Push Job
-        run: echo "Deploying backend from push event."
-
-  pr-review-check:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - name: PR Job
-        run: echo "Reviewing code from pull request."
-
