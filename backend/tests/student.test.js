@@ -31,6 +31,12 @@ describe('Student API', () => {
         major: 'History'
     };
 
+    const studentData = {
+        name: 'Peter Nicholson',
+        age: 21,
+        major: 'Mathematics'
+    };
+
     it('POST /api/students - should create a new student', async () => {
         const res = await request(app)
             .post('/api/students')
