@@ -16,11 +16,3 @@ on:
         required: true
         default: 'Testing'
 
-jobs:
-  detect-event:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Report Event Type
-        run: |
-          echo "Triggered by: ${{ github.event_name }}"
-          echo "Action: ${{ github.action }}"
