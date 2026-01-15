@@ -1,0 +1,44 @@
+name: Event Understanding Lab
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/**' # Only trigger if backend folder changes
+  pull_request:
+    types: [opened, reopened]
+  schedule:
+    - cron: '0 * * * *' # Every hour
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Why are you running this manually?'
+        required: true
+        default: 'Testing'
+
+jobs:
+  detect-event:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report Event Type
+        run: |
+          echo "This workflow was triggered by: ${{ github.event_name }}"
+          echo "The action performed was: ${{ github.action }}"
+
+  backend-deployment:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying backend because a PUSH occurred in the backend folder."
+
+  pr-review-check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Running security audits because a PULL REQUEST was opened."
+
+  manual-maintenance:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Reason for manual run: ${{ github.event.inputs.reason }}"
