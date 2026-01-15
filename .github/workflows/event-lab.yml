@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'backend/**' # Only trigger if backend folder changes
+      - 'backend/**' 
   pull_request:
     types: [opened, reopened]
   schedule:
-    - cron: '0 * * * *' # Every hour
+    - cron: '0 * * * *' 
   workflow_dispatch:
     inputs:
       reason:
@@ -29,16 +29,19 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Deploying backend because a PUSH occurred in the backend folder."
+      - name: Deploy Step
+        run: echo "Deploying backend because a PUSH occurred in the backend folder."
 
   pr-review-check:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Running security audits because a PULL REQUEST was opened."
+      - name: Audit Step
+        run: echo "Running security audits because a PULL REQUEST was opened."
 
   manual-maintenance:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Reason for manual run: ${{ github.event.inputs.reason }}"
+      - name: Maintenance Step
+        run: echo "Reason for manual run: ${{ github.event.inputs.reason }}"
