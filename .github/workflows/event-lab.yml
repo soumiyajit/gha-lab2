@@ -39,4 +39,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Manual Job
-        run: echo "Reason provided: ${{ github.event.inputs.reason }}"
+        run: echo "Manual Job"
