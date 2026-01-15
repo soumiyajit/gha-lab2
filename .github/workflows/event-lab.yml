@@ -36,9 +36,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Running security audits because a PULL REQUEST was opened."
-
-  manual-maintenance:
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Reason for manual run: ${{ github.event.inputs.reason }}"
