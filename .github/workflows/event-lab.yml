@@ -15,6 +15,13 @@ on:
         required: true
         default: 'Testing'
 jobs:
+  detect-event:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report Event Type
+        run: |
+          echo "This workflow was triggered by: ${{ github.event_name }}"
+          echo "The action performed was: ${{ github.action }}"
   backend-deployment:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
