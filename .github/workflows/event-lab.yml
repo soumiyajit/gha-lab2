@@ -22,6 +22,8 @@ jobs:
         run: |
           echo "This workflow was triggered by: ${{ github.event_name }}"
           echo "The action performed was: ${{ github.action }}"
+      - name: Dump full event data
+        run: echo "${{ toJson(github.event) }}"
   backend-deployment:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
