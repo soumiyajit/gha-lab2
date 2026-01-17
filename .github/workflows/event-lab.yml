@@ -1,5 +1,4 @@
 name: Event Understanding Lab
-
 on:
   push:
     branches: [ main ]
@@ -15,7 +14,6 @@ on:
         description: 'Why are you running this manually?'
         required: true
         default: 'Testing'
-
 jobs:
   detect-event:
     runs-on: ubuntu-latest
@@ -24,24 +22,21 @@ jobs:
         run: |
           echo "This workflow was triggered by: ${{ github.event_name }}"
           echo "The action performed was: ${{ github.action }}"
-
   backend-deployment:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - name: Run Backend Logic
-        run: echo "Deploying backend because a PUSH occurred in the backend folder."
-
+      - name: Push Job
+        run: echo "Deploying backend from push event."
   pr-review-check:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - name: Run Security Logic
-        run: echo "Running security audits because a PULL REQUEST was opened."
-
+      - name: PR Job
+        run: echo "Reviewing code from pull request."
   manual-maintenance:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
-      - name: Run Manual Logic
-        run: echo "Reason for manual run: ${{ github.event.inputs.reason }}"
+      - name: Manual Job
+        run: echo "Manual Job"
