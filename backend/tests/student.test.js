@@ -27,7 +27,7 @@ afterAll(async () => {
 describe('Student API', () => {
     const studentData = {
         name: 'Jane Doe',
-        age: 24,
+        age: 22,
         major: 'History'
     };
     
