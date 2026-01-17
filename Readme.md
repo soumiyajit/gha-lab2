@@ -97,18 +97,10 @@ npm test
 
 Frontend TestsRun unit tests for the React components:Bashcd student-management-system/frontend
 npm test
-API EndpointsAll backend API endpoints are prefixed with /api.
-----------------------------------------------------------------------
-Method    |    Endpoint             |    Description
-----------------------------------------------------------------------
-GET       |    /api/students        |    Get all students
-GET       |    /api/students/:id    |    Get a single student by ID
-POST      |    /api/students        |    Create a new student
-PUT       |    /api/students/:id    |    Update a student by ID
-DELETE    |    /api/students/:id    |    Delete a student by ID
-----------------------------------------------------------------------
 
 Author - Soumiyajit Das Chowdhury
+
+[Adding this line to test the event trigger]
 
 
 
